@@ -3,7 +3,7 @@ import Heddy from '../../img/hedyLammarr.jpg';
 
 const Navbar = () => {
   return (
-    <div className='flex justify-between h-14 items-center px-2 py-1 w-full gap-8 border-b shadow-sm'>
+    <div className='flex justify-between h-14 items-center px-2 py-1 w-full gap-8 border-b '>
       <span className='font-semibold'>Chat</span>
       <div className='flex items-center gap-1'>
         <img src={Heddy} alt='logo' className='h-8 w-8 rounded-full' />

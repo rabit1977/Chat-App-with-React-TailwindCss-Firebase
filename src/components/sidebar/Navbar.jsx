@@ -1,4 +1,6 @@
+import { signOut } from 'firebase/auth';
 import React from 'react';
+import { auth } from '../../firebase';
 import Heddy from '../../img/hedyLammarr.jpg';
 
 const Navbar = () => {
@@ -8,7 +10,10 @@ const Navbar = () => {
       <div className='flex items-center gap-1'>
         <img src={Heddy} alt='logo' className='h-8 w-8 rounded-full' />
         <span className='text-xs text-[#5C6C79] '>John</span>
-        <button className='bg-[#218CD8] px-3 py-1 text-xs rounded-full text-[#F9FCFD] shadow-sm hover:bg-[#0e77cc] hover:shadow-md'>
+        <button
+          onClick={() => signOut(auth)}
+          className='bg-[#218CD8] px-3 py-1 text-xs rounded-full text-[#F9FCFD] shadow-sm hover:bg-[#0e77cc] hover:shadow-md'
+        >
           Logout
         </button>
       </div>

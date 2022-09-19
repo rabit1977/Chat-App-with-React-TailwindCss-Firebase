@@ -13,7 +13,7 @@ export const CameraIcon = (props) => {
           d='M37.1679 14.8075L36.8468 14.5L37.1679 14.1925L42 9.56536V19.4347L37.1679 14.8075ZM35.2486 12.9696V16.0304V16.605V27H2V2H35.2486V12.395V12.9696Z'
           fill='white'
           stroke='black'
-          stroke-width='4'
+          strokeWidth='4'
         />
       </g>
       <defs>

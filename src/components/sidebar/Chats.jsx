@@ -18,6 +18,7 @@ const Chats = () => {
           setChats(doc.data());
         }
       );
+      // terminate the onSnapshot
       return () => {
         unsub();
       };

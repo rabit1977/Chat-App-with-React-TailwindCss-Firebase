@@ -1,13 +1,83 @@
-import React from 'react';
 import Heddy from '../../img/hedyLammarr.jpg';
+import React, { useContext, useState } from 'react';
+import { AuthContext } from '../../context/AuthContext';
+import { ChatContext } from '../../context/ChatContext';
+import {
+  arrayUnion,
+  doc,
+  serverTimestamp,
+  Timestamp,
+  updateDoc,
+} from 'firebase/firestore';
+import { db, storage } from '../../firebase';
+import { v4 as uuid } from 'uuid';
+import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
 
 const Input = () => {
+  const [text, setText] = useState('');
+  const [img, setImg] = useState(null);
+
+  const { currentUser } = useContext(AuthContext);
+  const { data } = useContext(ChatContext);
+
+  const handleSend = async () => {
+    if (img) {
+      const storageRef = ref(storage, uuid());
+
+      const uploadTask = uploadBytesResumable(storageRef, img);
+
+      uploadTask.on(
+        (error) => {
+          //TODO:Handle Error
+        },
+        () => {
+          getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
+            await updateDoc(doc(db, 'chats', data.chatId), {
+              messages: arrayUnion({
+                id: uuid(),
+                text,
+                senderId: currentUser.uid,
+                date: Timestamp.now(),
+                img: downloadURL,
+              }),
+            });
+          });
+        }
+      );
+    } else {
+      await updateDoc(doc(db, 'chats', data.chatId), {
+        messages: arrayUnion({
+          id: uuid(),
+          text,
+          senderId: currentUser.uid,
+          date: Timestamp.now(),
+        }),
+      });
+    }
+
+    await updateDoc(doc(db, 'userChats', currentUser.uid), {
+      [data.chatId + '.lastMessage']: {
+        text,
+      },
+      [data.chatId + '.date']: serverTimestamp(),
+    });
+
+    await updateDoc(doc(db, 'userChats', data.user.uid), {
+      [data.chatId + '.lastMessage']: {
+        text,
+      },
+      [data.chatId + '.date']: serverTimestamp(),
+    });
+
+    setText('');
+    setImg(null);
+  };
   return (
-    <div className='flex justify-between p-2 border-t '>
+    <div className='flex justify-between p-2 border-t border-teal-400 '>
       <input
         type='text'
         placeholder='Type something...'
-        className='flex flex-1  outline-none text-sm '
+        className='flex flex-1 placeholder:text-teal-600 outline-none text-xs '
       />
       <div className='flex gap-2 items-center'>
         <img src='' alt='' />
@@ -15,7 +85,7 @@ const Input = () => {
         <label htmlFor='file'>
           <img src={Heddy} alt='' className='w-8 h-8 rounded-full' />
         </label>
-        <button className='bg-[#218CD8] px-3 py-1 text-sm rounded-full text-[#F9FCFD] shadow-sm hover:bg-[#0e77cc] hover:shadow-md'>
+        <button className='bg-teal-500 px-3 py-1 text-sm rounded-full text-[#F9FCFD] shadow-sm font-semibold hover:bg-teal-600 hover:shadow-md'>
           Send
         </button>
       </div>

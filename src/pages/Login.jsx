@@ -23,35 +23,35 @@ const Login = () => {
   };
 
   return (
-    <div className='flex h-screen items-center justify-center bg-slate-100'>
-      <div className='flex flex-col border shadow-sm items-center rounded-md space-y-3 py-8 px-4 bg-white'>
-        <span className='text-2xl font-semibold'>Chat App</span>
-        <span className='text-[#218CD8] font-bold tracking-wide'>Login</span>
+    <div className='flex h-screen items-center justify-center bg-teal-200  '>
+      <div className='flex flex-col border shadow-lg items-center rounded-md space-y-3 py-8 px-2 bg-teal-200 ring ring-offset-8 ring-teal-700'>
+        <span className='text-3xl font-bold text-teal-900'>Chat App</span>
+        <span className='text-teal-900 font-bold tracking-wide'>Login</span>
         <form onSubmit={handleSubmit} className='flex flex-col space-y-6'>
           <input
             required
             type='email'
             placeholder='email'
             onChange={(e) => setEmail(e.target.value)}
-            className='border-b placeholder:text-slate-500 text-sm outline-none p-2 hover:rounded-full hover:bg-[#E6E7E8] focus:border-[#218CD8]'
+            className='border-b placeholder:text-teal-700 text-sm outline-none p-2 rounded-full hover:ring-1 ring-teal-900 placeholder'
           />
           <input
             required
             type='password'
             onChange={(e) => setPassword(e.target.value)}
             placeholder='password'
-            className='border-b placeholder:text-slate-500 text-sm outline-none p-2 hover:rounded-full hover:bg-[#E6E7E8] focus:border-blue-500'
+            className='border-b placeholder:text-teal-700 text-sm outline-none p-2 rounded-full hover:ring-1 ring-teal-900'
           />
-          <button className='bg-[#218CD8] text-white rounded-full p-1 hover:bg-[#0a5890]'>
+          <button className='bg-gradient-to-r from-teal-500 to-teal-700 hover:bg-gradient-to-l hover:from-teal-500 hover:to-teal-700 text-white rounded-full p-1 hover:bg-[#0a5890]'>
             Sign in
           </button>
           {err && <span>Something went wrong</span>}
         </form>
-        <p className='text-xs'>
+        <p className='text-xs text-teal-700'>
           You don't have an account?{' '}
           <Link
             to='/register'
-            className='text-[#218CD8] font-bold hover:text-[#218CD8]/70'
+            className='text-teal-700 font-bold hover:text-teal-900'
           >
             Register
           </Link>

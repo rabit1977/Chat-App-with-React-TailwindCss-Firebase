@@ -78,14 +78,27 @@ const Input = () => {
         type='text'
         placeholder='Type something...'
         className='flex flex-1 placeholder:text-teal-600 outline-none text-xs '
+        value={text}
+        onChange={(e) => setText(e.target.value)}
       />
       <div className='flex gap-2 items-center'>
         <img src='' alt='' />
-        <input type='file' className='hidden' />
+        <input
+          type='file'
+          className='hidden'
+          onChange={(e) => setImg(e.target.files[0])}
+        />
         <label htmlFor='file'>
-          <img src={Heddy} alt='' className='w-8 h-8 rounded-full' />
+          <img
+            src={currentUser.photoURL}
+            alt=''
+            className='w-8 h-8 rounded-full'
+          />
         </label>
-        <button className='bg-teal-500 px-3 py-1 text-sm rounded-full text-[#F9FCFD] shadow-sm font-semibold hover:bg-teal-600 hover:shadow-md'>
+        <button
+          className='bg-teal-500 px-3 py-1 text-sm rounded-full text-[#F9FCFD] shadow-sm font-semibold hover:bg-teal-600 hover:shadow-md'
+          onClick={handleSend}
+        >
           Send
         </button>
       </div>

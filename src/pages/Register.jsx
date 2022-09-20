@@ -81,7 +81,7 @@ const Register = () => {
             placeholder='password'
             className='border-b placeholder:text-slate-500 text-sm outline-none p-2 hover:rounded-full hover:bg-[#E6E7E8]'
           />
-          <input type='file' id='file' className='hidden' />
+          <input required type='file' id='file' className='hidden' />
           <label htmlFor='file' className='flex gap-2 items-center'>
             <AddIcon />
             <span className='text-xs'>Add an avatar</span>

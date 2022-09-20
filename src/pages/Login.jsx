@@ -23,7 +23,7 @@ const Login = () => {
   };
 
   return (
-    <div className='flex h-screen items-center justify-center bg-teal-200  '>
+    <div className='flex h-screen items-center justify-center bg-teal-200/60 '>
       <div className='flex flex-col border shadow-lg items-center rounded-md space-y-3 py-8 px-2 bg-teal-200 ring ring-offset-8 ring-teal-700'>
         <span className='text-3xl font-bold text-teal-900'>Chat App</span>
         <span className='text-teal-900 font-bold tracking-wide'>Login</span>
